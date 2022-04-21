@@ -14,7 +14,7 @@ public class Configuration {
     private DataSource dataSource;
 
     /**
-     * key: statementId, value: 封装好的 MappedStatement 对象
+     * key: statementId(namespace.id), value: 封装好的 MappedStatement 对象
      */
     private Map<String, MappedStatement> mappedStatementMap = new HashMap<>();
 

@@ -43,7 +43,7 @@ public class IPersistenceTest {
     }
 
     @Test
-    public void testProxy() throws DocumentException {
+    public void testProxy(){
         InputStream in = Resource.getResourceAsStream("SqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
         SqlSession sqlSession = sqlSessionFactory.openSession();

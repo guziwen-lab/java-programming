@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
     @Override
-    public List<User> findAll() throws DocumentException {
-        InputStream in = Resource.getResourceAsStream("SqlMapConfig.xml.example");
+    public List<User> findAll() {
+        InputStream in = Resource.getResourceAsStream("SqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
@@ -27,8 +27,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByCondition(User user) throws DocumentException {
-        InputStream in = Resource.getResourceAsStream("SqlMapConfig.xml.example");
+    public User findByCondition(User user) {
+        InputStream in = Resource.getResourceAsStream("SqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 

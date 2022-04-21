@@ -13,8 +13,8 @@ import java.util.List;
 public interface UserDao {
 
     //查询所有用户
-    List<User> findAll() throws DocumentException;
+    List<User> findAll();
 
     //根据条件查询
-    User findByCondition(User user) throws DocumentException;
+    User findByCondition(User user);
 }

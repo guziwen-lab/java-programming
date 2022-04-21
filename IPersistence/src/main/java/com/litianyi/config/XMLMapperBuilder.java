@@ -29,14 +29,14 @@ public class XMLMapperBuilder {
         for (Element element : mapperList) {
             String mapperPath = element.attributeValue("resource");
             InputStream inputStream = Resource.getResourceAsStream(mapperPath);
-            this.parse(inputStream);
+            this.parseMapper(inputStream);
         }
     }
 
     /**
      * 解析mapper.xml
      */
-    public void parse(InputStream in) throws DocumentException {
+    public void parseMapper(InputStream in) throws DocumentException {
         Document document = new SAXReader().read(in);
         Element rootElement = document.getRootElement();
         String namespace = rootElement.attributeValue("namespace");
