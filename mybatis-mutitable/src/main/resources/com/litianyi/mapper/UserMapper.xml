@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.litianyi.mapper.UserMapper">
+    <resultMap id="UserOrderMap" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="birthday" column="birthday"/>
+        <collection property="orders" ofType="Order">
+            <id property="id" column="oid"/>
+            <result property="orderTime" column="order_time"/>
+            <result property="total" column="total"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="UserRoleMap" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="birthday" column="birthday"/>
+        <collection property="roles" ofType="Role">
+            <id property="id" column="rid"/>
+            <result property="roleName" column="role_name"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="UserOrderRoleMap" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="birthday" column="birthday"/>
+        <collection property="orders" ofType="Order">
+            <id property="id" column="oid"/>
+            <result property="orderTime" column="order_time"/>
+            <result property="total" column="total"/>
+        </collection>
+        <collection property="roles" ofType="Role">
+            <id property="id" column="rid"/>
+            <result property="roleName" column="role_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="listUserWithOrder" resultMap="UserOrderMap">
+        select u.*, o.id oid, o.order_time, o.total, o.user_id
+        from t_user u
+                     left join t_order o on u.id = o.user_id
+    </select>
+
+    <select id="listUserWithRole" resultMap="UserRoleMap">
+        select u.*,
+               r.id rid,
+               r.role_name
+        from t_user u
+                     left outer join t_user_role ur on u.id = ur.user_id
+                     left join t_role r on ur.role_id = r.id
+    </select>
+
+    <select id="listUserWithOrderRole" resultMap="UserOrderRoleMap">
+        select u.*,
+               o.id oid,
+               o.order_time,
+               o.total,
+               o.user_id,
+               r.id rid,
+               r.role_name
+        from t_user u
+                     left join t_order o on u.id = o.user_id
+                     left outer join t_user_role ur on u.id = ur.user_id
+                     left join t_role r on ur.role_id = r.id
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+<mapper namespace="com.litianyi.dao.UserDao">
+
+    <!--sql的唯一标识：namespace.id ： statementId-->
+    <select id="findAll" resultType="com.litianyi.po.User">
+        select * from user
+    </select>
+
+    <select id="findByCondition" resultType="com.litianyi.po.User" parameterType="com.litianyi.po.User">
+        select * from user where id = #{id} and username = #{username}
+    </select>
+</mapper>
