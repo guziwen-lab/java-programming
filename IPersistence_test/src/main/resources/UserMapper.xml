@@ -2,10 +2,15 @@
 
     <!--sql的唯一标识：namespace.id ： statementId-->
     <select id="findAll" resultType="com.litianyi.po.User">
-        select * from user
+        select * from t_user
     </select>
 
     <select id="findByCondition" resultType="com.litianyi.po.User" parameterType="com.litianyi.po.User">
-        select * from user where id = #{id} and username = #{username}
+        select * from t_user where id = #{id} and username = #{username}
     </select>
+
+    <insert id="addUser" parameterType="com.litianyi.po.User">
+        insert into t_user(id, username, password, birthday)
+        values (#{id}, #{username}, #{password}, #{birthday})
+    </insert>
 </mapper>

@@ -8,10 +8,12 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +22,21 @@ import java.util.List;
  * @date 2022/3/13 9:53 PM
  */
 public class JDBCTest {
+
+    private SqlSession sqlSession;
+
+    private UserMapper userMapper;
+
+    private OrderMapper orderMapper;
+
+    @Before
+    public void beforeExecute() throws IOException {
+        InputStream resource = Resources.getResourceAsStream("SqlMapConfig.xml");
+        SqlSessionFactory build = new SqlSessionFactoryBuilder().build(resource);
+        this.sqlSession = build.openSession(true);
+        this.userMapper = sqlSession.getMapper(UserMapper.class);
+        this.orderMapper = sqlSession.getMapper(OrderMapper.class);
+    }
 
     /**
      * 一对一
@@ -64,5 +81,16 @@ public class JDBCTest {
         for (User user : users) {
             System.out.println(user);
         }
+    }
+
+    @Test
+    public void addUserTest() {
+        userMapper.addUser(new User(null, "chong", "1234", new Date(), null, null));
+    }
+
+    @Test
+    public void getOrderWithUserTest() {
+        Order orderWithUser = orderMapper.getOrderWithUser(1L);
+        System.out.println(orderWithUser);
     }
 }

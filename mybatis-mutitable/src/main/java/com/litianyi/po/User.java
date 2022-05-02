@@ -1,9 +1,8 @@
 package com.litianyi.po;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,10 +12,11 @@ import java.util.List;
  * @version 1.0
  * @date 2022/3/7 12:02 PM
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements Serializable {
     private Long id;
     private String username;
     private String password;

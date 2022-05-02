@@ -25,7 +25,9 @@ public class IPersistenceTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        User user = new User(1L, "张三");
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("张三");
         User o = sqlSession.selectOne("com.litianyi.dao.UserDao.findByCondition", user);
         System.out.println(o);
     }
@@ -43,17 +45,28 @@ public class IPersistenceTest {
     }
 
     @Test
-    public void testProxy(){
+    public void testProxy() {
         InputStream in = Resource.getResourceAsStream("SqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         UserDao userDao = sqlSession.getMapper(UserDao.class);
-        User user = userDao.findByCondition(new User(1L, "张三"));
-        System.out.println(user);
         List<User> all = userDao.findAll();
         for (User user1 : all) {
             System.out.println(user1);
         }
+    }
+
+    @Test
+    public void testProxyInsert() {
+        InputStream in = Resource.getResourceAsStream("SqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        User user = new User();
+        user.setUsername("gogogo");
+
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        userDao.addUser(user);
     }
 }

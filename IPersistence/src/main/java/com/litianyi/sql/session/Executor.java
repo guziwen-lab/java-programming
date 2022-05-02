@@ -1,5 +1,6 @@
 package com.litianyi.sql.session;
 
+import com.litianyi.pojo.Configuration;
 import com.litianyi.pojo.MappedStatement;
 
 import javax.sql.DataSource;
@@ -12,5 +13,9 @@ import java.util.List;
  */
 public interface Executor {
 
-    <E> List<E> query(DataSource dataSource, MappedStatement statement, Object... params) throws Exception;
+    <E> List<E> query(Configuration configuration, MappedStatement statement, Object[] params) throws Exception;
+
+    Integer update(Configuration configuration, MappedStatement mappedStatement, Object[] params) throws Exception;
+
+    Integer delete(Configuration configuration, MappedStatement mappedStatement, Object[] params) throws Exception;
 }

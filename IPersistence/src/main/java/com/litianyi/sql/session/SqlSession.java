@@ -23,6 +23,12 @@ public interface SqlSession {
      */
     <T> T selectOne(String statementId, Object... params);
 
+    Integer insert(String statement, Object... params);
+
+    Integer update(String statement, Object... params);
+
+    Integer delete(String statement, Object... params);
+
     //为dao接口生成代理实现类
     <T> T getMapper(Class<? extends T> mapperClass);
 }

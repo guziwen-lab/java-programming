@@ -32,6 +32,11 @@ public class UserDaoImpl implements UserDao {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        return sqlSession.selectOne("user.selectOne", new User(1L, "张三"));
+        return sqlSession.selectOne("user.selectOne", user);
+    }
+
+    @Override
+    public Integer addUser(User user) {
+        return null;
     }
 }

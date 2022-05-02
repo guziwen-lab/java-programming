@@ -41,7 +41,7 @@ public class XMLMapperBuilder {
         Element rootElement = document.getRootElement();
         String namespace = rootElement.attributeValue("namespace");
 
-        List<Element> list = rootElement.selectNodes("//select");
+        List<Element> list = rootElement.selectNodes("select|insert|update|delete");
         list.forEach(element -> {
             String id = element.attributeValue("id");
             String resultType = element.attributeValue("resultType");

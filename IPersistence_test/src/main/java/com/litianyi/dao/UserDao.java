@@ -17,4 +17,6 @@ public interface UserDao {
 
     //根据条件查询
     User findByCondition(User user);
+
+    Integer addUser(User user);
 }

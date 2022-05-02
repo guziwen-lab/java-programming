@@ -1,5 +1,6 @@
 package com.litianyi.sql.session;
 
+import com.litianyi.pojo.Configuration;
 import com.litianyi.pojo.MappedStatement;
 import com.litianyi.sql.session.pojo.BoundSql;
 import com.litianyi.utils.GenericTokenParser;
@@ -25,9 +26,9 @@ import java.util.List;
 public class SimpleExecutor implements Executor {
 
     @Override
-    public <E> List<E> query(DataSource dataSource, MappedStatement mappedStatement, Object... params) throws Exception {
+    public <E> List<E> query(Configuration configuration, MappedStatement mappedStatement, Object[] params) throws Exception {
         // 注册驱动，获取连接
-        Connection connection = dataSource.getConnection();
+        Connection connection = configuration.getDataSource().getConnection();
 
         // 获取sql select * from user where id = #{id} and username = #{username}
         String sql = mappedStatement.getSql();
@@ -40,15 +41,15 @@ public class SimpleExecutor implements Executor {
         // 设置参数
         if (mappedStatement.getParameterType() != null) {
             List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
-            Class<?> parameterClass = Class.forName(mappedStatement.getParameterType());
+            Class<?> parameterClass = getClassType(mappedStatement.getParameterType());
             for (int i = 0; i < parameterMappings.size(); i++) {
                 String content = parameterMappings.get(i).getContent();
 
                 Field field = parameterClass.getDeclaredField(content);
                 field.setAccessible(true);
-                Object o = field.get(params[0]);
+                Object filedValue = field.get(params[0]);
 
-                preparedStatement.setObject(i + 1, o);
+                preparedStatement.setObject(i + 1, filedValue);
             }
         }
 
@@ -57,7 +58,7 @@ public class SimpleExecutor implements Executor {
 
         // 封装返回结果集
         List<E> list = new ArrayList<>();
-        Class<E> resultClass = (Class<E>) Class.forName(mappedStatement.getResultType());
+        Class<E> resultClass = (Class<E>) getClassType(mappedStatement.getResultType());
         while (resultSet.next()) {
             E instance = resultClass.newInstance();
             ResultSetMetaData metaData = resultSet.getMetaData();
@@ -77,6 +78,57 @@ public class SimpleExecutor implements Executor {
         return list;
     }
 
+    @Override
+    public Integer update(Configuration configuration, MappedStatement mappedStatement, Object[] params) throws Exception {
+
+        Connection connection = configuration.getDataSource().getConnection();
+
+        String sql = mappedStatement.getSql();
+        BoundSql boundSql = getBoundSql(sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(boundSql.getSqlText());
+
+        Class<?> parameterClass = getClassType(mappedStatement.getParameterType());
+        List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+        for (int i = 0; i < parameterMappings.size(); i++) {
+            String content = parameterMappings.get(i).getContent();
+
+            Field field = parameterClass.getDeclaredField(content);
+            field.setAccessible(true);
+            Object filedValue = field.get(params[0]);
+
+            preparedStatement.setObject(i + 1, filedValue);
+        }
+        // 5. 执行sql
+        return preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public Integer delete(Configuration configuration, MappedStatement mappedStatement, Object[] params) throws Exception {
+        Connection connection = configuration.getDataSource().getConnection();
+
+        String sql = mappedStatement.getSql();
+        BoundSql boundSql = getBoundSql(sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(boundSql.getSqlText());
+
+        Class<?> parameterClass = getClassType(mappedStatement.getParameterType());
+        List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+        if (parameterClass == Integer.class) {
+            preparedStatement.setObject(1, params[0]);
+        } else {
+            for (int i = 0; i < parameterMappings.size(); i++) {
+                String content = parameterMappings.get(i).getContent();
+
+                Field field = parameterClass.getDeclaredField(content);
+                field.setAccessible(true);
+                Object filedValue = field.get(params[0]);
+
+                preparedStatement.setObject(i + 1, filedValue);
+            }
+        }
+        // 5. 执行sql
+        return preparedStatement.executeUpdate();
+    }
+
     /**
      * 完成对#{}的解析
      * 1. 将#{}使用?代替
@@ -94,5 +146,12 @@ public class SimpleExecutor implements Executor {
         List<ParameterMapping> parameterMappings = parameterMappingTokenHandler.getParameterMappings();
 
         return new BoundSql(parseSql, parameterMappings);
+    }
+
+    private Class<?> getClassType(String parameterType) throws ClassNotFoundException {
+        if (parameterType != null) {
+            return Class.forName(parameterType);
+        }
+        return null;
     }
 }
