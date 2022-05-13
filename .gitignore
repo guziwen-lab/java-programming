@@ -32,3 +32,4 @@ hs_err_pid*
 **/SqlMapConfig.xml
 **/jdbc.properties
 **/redis.properties
+**/DruidUtils.java
