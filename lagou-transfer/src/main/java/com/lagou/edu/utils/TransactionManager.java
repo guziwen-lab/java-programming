@@ -1,32 +1,47 @@
 package com.lagou.edu.utils;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * @author 应癫
- * <p>
- * 事务管理器类：负责手动事务的开启、提交、回滚
+ * 事务管理器
+ *
+ * @author litianyi
+ * @version 1.0
+ * @date 2022/5/16 4:46 PM
  */
 public class TransactionManager {
 
-    private ConnectionUtils connectionUtils = new ConnectionUtils();
-
-    public void setConnectionUtils(ConnectionUtils connectionUtils) {
-        this.connectionUtils = connectionUtils;
+    private TransactionManager() {
     }
 
-    // 开启手动事务控制
-    public void beginTransaction() throws SQLException {
-        connectionUtils.getCurrentThreadConn().setAutoCommit(false);
+    private final static TransactionManager transactionManager = new TransactionManager();
+
+    public static TransactionManager getInstance() {
+        return transactionManager;
     }
 
-    // 提交事务
-    public void commit() throws SQLException {
-        connectionUtils.getCurrentThreadConn().commit();
+    public static void beginTransaction() {
+        try {
+            ConnectionUtils.getConnection().setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    // 回滚事务
-    public void rollback() throws SQLException {
-        connectionUtils.getCurrentThreadConn().rollback();
+    public static void commit() {
+        try {
+            ConnectionUtils.getConnection().commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void rollback() {
+        try {
+            ConnectionUtils.getConnection().rollback();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

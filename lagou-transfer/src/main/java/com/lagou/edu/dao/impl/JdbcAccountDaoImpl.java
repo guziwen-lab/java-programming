@@ -13,20 +13,18 @@ import java.sql.ResultSet;
  */
 public class JdbcAccountDaoImpl implements AccountDao {
 
-    ConnectionUtils connectionUtils = new ConnectionUtils();
-
     @Override
     public Account queryAccountByCardNo(String cardNo) throws Exception {
         //从连接池获取连接
         // Connection con = DruidUtils.getInstance().getConnection();
-        Connection con = connectionUtils.getCurrentThreadConn();
+        Connection con = ConnectionUtils.getInstance().getConnection();
         String sql = "select * from account where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
-        preparedStatement.setString(1,cardNo);
+        preparedStatement.setString(1, cardNo);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         Account account = new Account();
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             account.setCardNo(resultSet.getString("cardNo"));
             account.setName(resultSet.getString("name"));
             account.setMoney(resultSet.getInt("money"));
@@ -45,11 +43,11 @@ public class JdbcAccountDaoImpl implements AccountDao {
         // 从连接池获取连接
         // 改造为：从当前线程当中获取绑定的connection连接
         //Connection con = DruidUtils.getInstance().getConnection();
-        Connection con = connectionUtils.getCurrentThreadConn();
+        Connection con = ConnectionUtils.getInstance().getConnection();
         String sql = "update account set money=? where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
-        preparedStatement.setInt(1,account.getMoney());
-        preparedStatement.setString(2,account.getCardNo());
+        preparedStatement.setInt(1, account.getMoney());
+        preparedStatement.setString(2, account.getCardNo());
         int i = preparedStatement.executeUpdate();
 
         preparedStatement.close();

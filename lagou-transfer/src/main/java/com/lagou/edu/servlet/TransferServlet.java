@@ -1,5 +1,6 @@
 package com.lagou.edu.servlet;
 
+import com.lagou.edu.factory.BeanFactory;
 import com.lagou.edu.service.impl.TransferServiceImpl;
 import com.lagou.edu.utils.JsonUtils;
 import com.lagou.edu.pojo.Result;
@@ -18,7 +19,8 @@ import java.io.IOException;
 @WebServlet(name = "transferServlet", urlPatterns = "/transferServlet")
 public class TransferServlet extends HttpServlet {
 
-    private final TransferService transferService = new TransferServiceImpl();
+    //    private final TransferService transferService = new TransferServiceImpl();
+    private final TransferService transferService = BeanFactory.getBean("transferService");
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
