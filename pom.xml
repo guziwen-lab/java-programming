@@ -14,11 +14,12 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
-    <modules>
+    <!--<modules>
         <module>IPersistence</module>
         <module>IPersistence_test</module>
         <module>mybatis-quick-starter</module>
         <module>mybatis-mutitable</module>
         <module>design-patten</module>
-    </modules>
+        <module>lagou-transfer</module>
+    </modules>-->
 </project>

@@ -15,29 +15,29 @@
 
     <select id="findAll" resultType="user">
         select *
-        from user;
+        from t_user;
     </select>
 
     <insert id="saveUser" parameterType="com.litianyi.po.User">
-        insert into user
+        insert into t_user
         values (#{id}, #{username})
     </insert>
 
     <update id="updateUser" parameterType="com.litianyi.po.User">
-        update user
+        update t_user
         set username = #{username}
         where id = #{id};
     </update>
 
     <delete id="deleteUser" parameterType="long">
         delete
-        from user
+        from t_user
         where id = #{id}
     </delete>
 
     <select id="findByCondition" parameterType="com.litianyi.po.User" resultType="com.litianyi.po.User">
         select *
-        from user
+        from t_user
         <where>
             <if test="id != null">
                 id = #{id}
@@ -51,7 +51,7 @@
     <select id="findByIds" parameterType="long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from user
+        from t_user
         <where>
             <foreach collection="array" item="id" open="id in (" close=")" separator=",">
                 #{id}

@@ -25,24 +25,24 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
-        TransactionManager.beginTransaction();
+       /* try {
+            TransactionManager.beginTransaction();*/
 
-        try {
-            Account from = accountDao.queryAccountByCardNo(fromCardNo);
-            Account to = accountDao.queryAccountByCardNo(toCardNo);
+        Account from = accountDao.queryAccountByCardNo(fromCardNo);
+        Account to = accountDao.queryAccountByCardNo(toCardNo);
 
-            from.setMoney(from.getMoney() - money);
-            to.setMoney(to.getMoney() + money);
+        from.setMoney(from.getMoney() - money);
+        to.setMoney(to.getMoney() + money);
 
-            accountDao.updateAccountByCardNo(to);
-            int i = 10 / 0;
-            accountDao.updateAccountByCardNo(from);
+        accountDao.updateAccountByCardNo(to);
+        int i = 10 / 0;
+        accountDao.updateAccountByCardNo(from);
 
-            TransactionManager.commit();
+     /*       TransactionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
             TransactionManager.rollback();
             throw e;
-        }
+        }*/
     }
 }

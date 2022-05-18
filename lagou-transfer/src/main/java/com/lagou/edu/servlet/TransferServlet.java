@@ -1,6 +1,7 @@
 package com.lagou.edu.servlet;
 
 import com.lagou.edu.factory.BeanFactory;
+import com.lagou.edu.factory.TransactionProxyFactory;
 import com.lagou.edu.service.impl.TransferServiceImpl;
 import com.lagou.edu.utils.JsonUtils;
 import com.lagou.edu.pojo.Result;
@@ -20,7 +21,9 @@ import java.io.IOException;
 public class TransferServlet extends HttpServlet {
 
     //    private final TransferService transferService = new TransferServiceImpl();
-    private final TransferService transferService = BeanFactory.getBean("transferService");
+//    private final TransferService transferService = BeanFactory.getBean("transferService");
+    private final TransferService transferService = new TransactionProxyFactory<>(
+            (TransferService) BeanFactory.getBean("transferService")).getTarget();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
