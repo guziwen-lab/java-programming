@@ -1,5 +1,6 @@
 package com.lagou.edu;
 
+import com.lagou.edu.pojo.Result;
 import com.lagou.edu.service.TransferService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -14,8 +15,10 @@ public class IoCTest {
 
     @Test
     public void test() {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
-        TransferService transferService = (TransferService) applicationContext.getBean("transferService");
-        System.out.println(transferService);
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
+        Result result = (Result) applicationContext.getBean("lazyResult");
+        System.out.println(result);
+
+        applicationContext.close();
     }
 }

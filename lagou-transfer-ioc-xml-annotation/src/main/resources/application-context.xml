@@ -21,5 +21,8 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <bean id="lazyResult" class="com.lagou.edu.pojo.Result" lazy-init="true"/>
+    <bean id="lazyResult" class="com.lagou.edu.pojo.Result" lazy-init="true" init-method="initMethod">
+        <property name="message" value="123"/>
+        <property name="status" value="s"/>
+    </bean>
 </beans>
