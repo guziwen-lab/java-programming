@@ -6,6 +6,8 @@ import com.lagou.edu.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.Properties;
@@ -18,10 +20,10 @@ import java.util.Set;
 public class TransferServiceImpl implements TransferService {
 
     @Autowired
-    @Qualifier("jdbcAccountDaoImpl")
     private AccountDao accountDao;
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
         System.out.println("执行转账");
 
@@ -32,7 +34,7 @@ public class TransferServiceImpl implements TransferService {
         to.setMoney(to.getMoney() + money);
 
         accountDao.updateAccountByCardNo(to);
-//        int i = 10 / 0;
+        int i = 10 / 0;
         accountDao.updateAccountByCardNo(from);
     }
 }

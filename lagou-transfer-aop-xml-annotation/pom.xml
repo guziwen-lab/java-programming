@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lagou.edu</groupId>
-    <artifactId>lagou-transfer-ioc-annotation</artifactId>
+    <artifactId>lagou-transfer-aop-xml-annotation</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>lagou-transfer-ioc-annotation Maven Webapp</name>
+    <name>lagou-transfer-aop-xml-annotation Maven Webapp</name>
     <url>http://www.example.com</url>
 
     <properties>
@@ -86,11 +86,17 @@
             <artifactId>spring-web</artifactId>
             <version>5.1.12.RELEASE</version>
         </dependency>
-
+        <!--Spring aop-->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <artifactId>spring-aop</artifactId>
             <version>5.1.12.RELEASE</version>
+        </dependency>
+        <!--aspectj-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
         </dependency>
     </dependencies>
 

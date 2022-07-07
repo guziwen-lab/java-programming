@@ -2,6 +2,7 @@ package com.lagou.edu;
 
 import com.lagou.edu.config.DataSourceConfig;
 import org.springframework.context.annotation.*;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author litianyi
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.*;
 @Configuration
 @ComponentScan(basePackages = {"com.lagou.edu"})
 @Import({DataSourceConfig.class})
+@EnableAspectJAutoProxy //开启spring对注解AOP的支持
+@EnableTransactionManagement //开启spring注解事务的支持
 public class SpringConfig {
 
 }

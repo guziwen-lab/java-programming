@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lagou.edu</groupId>
-    <artifactId>lagou-transfer-ioc-annotation</artifactId>
+    <artifactId>lagou-transfer-transaction</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>lagou-transfer-ioc-annotation Maven Webapp</name>
+    <name>lagou-transfer-transaction Maven Webapp</name>
     <url>http://www.example.com</url>
 
     <properties>
@@ -55,31 +55,13 @@
             <version>2.9.6</version>
         </dependency>
 
-        <!--dom4j依赖-->
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <!--xpath表达式依赖-->
-        <dependency>
-            <groupId>jaxen</groupId>
-            <artifactId>jaxen</artifactId>
-            <version>1.1.6</version>
-        </dependency>
-        <!--引入cglib依赖包-->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.3.0</version>
-        </dependency>
-
         <!--spring IoC-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>5.1.12.RELEASE</version>
         </dependency>
+
         <!--spring web-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -87,6 +69,25 @@
             <version>5.1.12.RELEASE</version>
         </dependency>
 
+        <!--Spring aop-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>5.1.12.RELEASE</version>
+        </dependency>
+        <!--aspectj-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+
+        <!--spring 声明式事物-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.1.12.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
