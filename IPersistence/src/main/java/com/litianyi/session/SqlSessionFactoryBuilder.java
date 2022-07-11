@@ -1,7 +1,7 @@
-package com.litianyi.sql.session;
+package com.litianyi.session;
 
 import com.litianyi.config.ConfigBuilder;
-import com.litianyi.pojo.Configuration;
+import com.litianyi.config.Configuration;
 import org.dom4j.DocumentException;
 
 import java.io.InputStream;
@@ -16,7 +16,7 @@ public class SqlSessionFactoryBuilder {
     public SqlSessionFactory build(InputStream in) {
         //解析配置文件，将解析出来的内容封装到容器对象 Configuration 中
         ConfigBuilder configBuilder = new ConfigBuilder();
-        Configuration configuration = null;
+        Configuration configuration;
         try {
             configuration = configBuilder.parseConfig(in);
         } catch (DocumentException e) {

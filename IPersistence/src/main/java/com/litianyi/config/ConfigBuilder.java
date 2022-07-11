@@ -1,6 +1,7 @@
 package com.litianyi.config;
 
-import com.litianyi.pojo.Configuration;
+import com.litianyi.io.XMLDatasourceBuilder;
+import com.litianyi.io.XMLMapperBuilder;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;

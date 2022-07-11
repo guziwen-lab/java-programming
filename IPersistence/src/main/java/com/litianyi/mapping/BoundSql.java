@@ -1,4 +1,4 @@
-package com.litianyi.sql.session.pojo;
+package com.litianyi.mapping;
 
 import com.litianyi.utils.ParameterMapping;
 

@@ -1,6 +1,6 @@
-package com.litianyi.sql.session;
+package com.litianyi.session;
 
-import com.litianyi.pojo.Configuration;
+import com.litianyi.config.Configuration;
 
 /**
  * @author litianyi

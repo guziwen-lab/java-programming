@@ -1,4 +1,6 @@
-package com.litianyi.pojo;
+package com.litianyi.config;
+
+import com.litianyi.mapping.MappedStatement;
 
 import javax.sql.DataSource;
 import java.util.HashMap;

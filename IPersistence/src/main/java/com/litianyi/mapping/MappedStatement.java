@@ -1,4 +1,4 @@
-package com.litianyi.pojo;
+package com.litianyi.mapping;
 
 /**
  * @author litianyi

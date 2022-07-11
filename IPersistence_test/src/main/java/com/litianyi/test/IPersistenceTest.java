@@ -3,9 +3,9 @@ package com.litianyi.test;
 import com.litianyi.dao.UserDao;
 import com.litianyi.io.Resource;
 import com.litianyi.po.User;
-import com.litianyi.sql.session.SqlSession;
-import com.litianyi.sql.session.SqlSessionFactory;
-import com.litianyi.sql.session.SqlSessionFactoryBuilder;
+import com.litianyi.session.SqlSession;
+import com.litianyi.session.SqlSessionFactory;
+import com.litianyi.session.SqlSessionFactoryBuilder;
 import org.dom4j.DocumentException;
 import org.junit.Test;
 

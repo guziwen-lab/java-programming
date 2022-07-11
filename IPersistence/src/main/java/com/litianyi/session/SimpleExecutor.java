@@ -1,13 +1,12 @@
-package com.litianyi.sql.session;
+package com.litianyi.session;
 
-import com.litianyi.pojo.Configuration;
-import com.litianyi.pojo.MappedStatement;
-import com.litianyi.sql.session.pojo.BoundSql;
+import com.litianyi.config.Configuration;
+import com.litianyi.mapping.MappedStatement;
+import com.litianyi.mapping.BoundSql;
 import com.litianyi.utils.GenericTokenParser;
 import com.litianyi.utils.ParameterMapping;
 import com.litianyi.utils.ParameterMappingTokenHandler;
 
-import javax.sql.DataSource;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

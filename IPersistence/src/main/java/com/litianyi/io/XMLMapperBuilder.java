@@ -1,8 +1,7 @@
-package com.litianyi.config;
+package com.litianyi.io;
 
-import com.litianyi.io.Resource;
-import com.litianyi.pojo.Configuration;
-import com.litianyi.pojo.MappedStatement;
+import com.litianyi.config.Configuration;
+import com.litianyi.mapping.MappedStatement;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;

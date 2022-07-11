@@ -1,7 +1,7 @@
-package com.litianyi.sql.session;
+package com.litianyi.session;
 
-import com.litianyi.pojo.Configuration;
-import com.litianyi.pojo.MappedStatement;
+import com.litianyi.config.Configuration;
+import com.litianyi.mapping.MappedStatement;
 
 import java.lang.reflect.*;
 import java.util.List;

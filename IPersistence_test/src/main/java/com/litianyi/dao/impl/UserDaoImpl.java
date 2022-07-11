@@ -3,10 +3,9 @@ package com.litianyi.dao.impl;
 import com.litianyi.dao.UserDao;
 import com.litianyi.io.Resource;
 import com.litianyi.po.User;
-import com.litianyi.sql.session.SqlSession;
-import com.litianyi.sql.session.SqlSessionFactory;
-import com.litianyi.sql.session.SqlSessionFactoryBuilder;
-import org.dom4j.DocumentException;
+import com.litianyi.session.SqlSession;
+import com.litianyi.session.SqlSessionFactory;
+import com.litianyi.session.SqlSessionFactoryBuilder;
 
 import java.io.InputStream;
 import java.util.List;

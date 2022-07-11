@@ -1,6 +1,6 @@
-package com.litianyi.config;
+package com.litianyi.io;
 
-import com.litianyi.pojo.Configuration;
+import com.litianyi.config.Configuration;
 import com.zaxxer.hikari.HikariDataSource;
 import org.dom4j.Element;
 
