@@ -74,6 +74,7 @@ public class BeanFactory {
         return constructor.newInstance();
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T getBean(String id) {
         return (T) map.get(id);
     }
